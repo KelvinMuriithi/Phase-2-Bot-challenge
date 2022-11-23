@@ -9,14 +9,10 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot }) {
+function BotCard({ bot, addToArmy, handleDelete }) {
   return (
     <div className="ui column">
-      <div
-        className="ui card"
-        key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
-      >
+      <div className="ui card" key={bot.id} onClick={() => addToArmy(bot)}>
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
         </div>
@@ -47,9 +43,12 @@ function BotCard({ bot }) {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                onClick={(e) => {
+                  // console.log("add code to delete")
+                  // Propagation means bubbling up to parent elements or capturing down to child elements.With stopPropagation, only the button's click handler is called while the div's click handler never fires
+                  // e.stopPropagation()
+                  handleDelete(bot);
+                }}
               >
                 x
               </button>
